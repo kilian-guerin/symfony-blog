@@ -15,7 +15,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
-#[Route('/article')]
 class ArticleController extends AbstractController
 {
     #[Route('/', name: 'app_article_index', methods: ['GET'])]
@@ -34,7 +33,7 @@ class ArticleController extends AbstractController
         return $this->render('article/index.html.twig', ['articles' => $articles]);
     }
 
-    #[Route('/new', name: 'app_article_new', methods: ['GET', 'POST'])]
+    #[Route('/article/new', name: 'app_article_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ArticleRepository $articleRepository): Response
     {
         $article = new Article();
@@ -58,7 +57,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_article_show')]
+    #[Route('/article/{id}', name: 'app_article_show')]
     public function show(ArticleRepository $articleRepo, CommentRepository $commentRepo, $id, Request $request, EntityManagerInterface $entityManager): Response
     {
         $comments =$commentRepo->findBy(['article' => $id]);
@@ -84,7 +83,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_article_edit', methods: ['GET', 'POST'])]
+    #[Route('/article/{id}/edit', name: 'app_article_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Article $article, ArticleRepository $articleRepository): Response
     {
         if($article->getUser()->getId() == $this->getUser()->getId() or $this->isGranted('ROLE_ADMIN')) {
@@ -106,7 +105,7 @@ class ArticleController extends AbstractController
         }
     }
 
-    #[Route('/{id}', name: 'app_article_delete', methods: ['POST'])]
+    #[Route('/article/{id}', name: 'app_article_delete', methods: ['POST'])]
     public function delete(Request $request, Article $article, ArticleRepository $articleRepository): Response
     {
         if($article->getUser()->getId() == $this->getUser()->getId() or $this->isGranted('ROLE_ADMIN')) {
@@ -120,7 +119,7 @@ class ArticleController extends AbstractController
         return $this->redirectToRoute('app_article_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/comment/delete/{id}', name: 'app_comment_delete', methods: ['POST'])]
+    #[Route('/article/comment/delete/{id}', name: 'app_comment_delete', methods: ['POST'])]
     public function commentdelete(Request $request, Comment $comment, CommentRepository $commentRepository): Response
     {
         if($comment->getUser()->getId() == $this->getUser()->getId() or $this->isGranted('ROLE_ADMIN')) {
