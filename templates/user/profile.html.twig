@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ app.user.firstname }}{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="/assets/css/style.css">
+{% endblock %}
+
+{% block body %}
+    <main class="form-signin w-100 m-auto">
+    <h1 class="text-center mt-2 mb-2"> Profile</h1>
+
+    {{ include('user/_form.html.twig') }}
+    </main>
+{% endblock %}

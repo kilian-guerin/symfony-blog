@@ -1,0 +1,10 @@
+{{ form_start(form) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.firstname) }}
+    {{ form_row(form.lastname) }}
+    {{ form_row(form.password) }}
+    {% if controller_name == 'AdminUserController' %}
+        {{ form_row(form.roles) }}
+    {% endif %}
+    <button class="w-100 btn btn-lg text-bg-warning mt-2">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

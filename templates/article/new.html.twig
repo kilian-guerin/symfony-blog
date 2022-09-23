@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Article{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="/assets/css/style.css">
+{% endblock %}
+
+{% block body %}
+     {% if app.user %}
+    <main class="form-signin w-100 m-auto">
+        <h1 class="text-center mt-5 mb-5"> New Article</h1>
+
+        {{ include('article/_form.html.twig') }}
+
+        <a href="{{ path('app_article_index') }}"><button class="w-100 btn btn-lg btn-primary mt-2">Back to list</button></a>
+    </main>
+    {% else %}
+    <main class="alert-noconnected h-75 m-auto d-flex align-items-center justify-content-center">
+        <h2 class="w-100 alert alert-danger">Vous devez être connecté pour accéder à cette page.</h2>
+    </main>
+    {% endif %}
+{% endblock %}
